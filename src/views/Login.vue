@@ -7,12 +7,13 @@
     <input type="password" v-model="adminPw" />
     <br />
     <button type="button" @click="login">로그인</button>
+    <br />
+    <br />
+    <span>로그인 된 관리자 : {{ adminNm }}</span>
   </div>
 </template>
 
 <script>
-import authService from "@/service/api/api-auth";
-
 export default {
   name: "Login",
   data() {
@@ -21,12 +22,23 @@ export default {
       adminPw: ""
     };
   },
+  computed: {
+    adminNm() {
+      return this.$store.state.adminNm;
+    }
+  },
   methods: {
     // 로그인 호출
     login() {
-      authService.login(this.adminId, this.adminPw).then(function(response) {
-        console.log("로그인 성공", response.data);
-      });
+      this.$store
+        .dispatch("login", {
+          adminId: this.adminId,
+          adminPw: this.adminPw
+        })
+        .then(() => {
+          // 로그인 성공
+          this.$router.push("/list");
+        });
     }
   }
 };
