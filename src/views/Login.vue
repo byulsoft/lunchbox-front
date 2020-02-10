@@ -1,16 +1,19 @@
 <template>
-  <div>
-    아이디 :
-    <input type="text" v-model="adminId" />
-    <br />
-    비밀번호 :
-    <input type="password" v-model="adminPw" />
-    <br />
-    <button type="button" @click="login">로그인</button>
-    <br />
-    <br />
-    <span>로그인 된 관리자 : {{ adminNm }}</span>
-  </div>
+  <el-row>
+    <el-col :span="8" :offset="8">
+      <el-form label-width="120px">
+        <el-form-item label="아이디" prop="adminId">
+          <el-input type="text" v-model="adminId"></el-input>
+        </el-form-item>
+        <el-form-item label="비밀번호" prop="adminPw">
+          <el-input type="password" v-model="adminPw"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="login">로그인</el-button>
+        </el-form-item>
+      </el-form>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
